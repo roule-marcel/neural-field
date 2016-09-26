@@ -18,17 +18,20 @@ int main(int argc, char const *argv[]) {
 
 	char file[256];
 	for(int t=0; ; t++) {
+		if (feof(stdin)) return 0;
 		for(int i=0; i<n; i++) {
 			scanf("%f", &A[i]);
 		}
 
 		for(int i=0; i<n; i++) {
-			int val = (int) ((A[i]-min)/(max-min));
+			int val = (int) (((A[i]-min)/(max-min))*100.0);
+			printf("%d\n", val);
 			for(int j=0; j<100; j++) {
 				out[j*n+i] = (100-j)<val ? 255 : 0;
 			}
 		}
 		sprintf(file, "plot_out/%08d.jpg", t);
 		save_jpg(out, n, 100, file);
+		printf("image\n");
 	}
 }
